@@ -18,6 +18,6 @@ jobs:
           go-version: ${{ matrix.go-version }}
       # You can test your matrix by printing the current Go version
       - name: Display Go version
-        run: go install github.com/TimoKats/mdrss@latest
+        run: go install github.com/TimoKats/mdrss@latest &&
              mdrss --config .mdrss/config.json update
 
