@@ -20,5 +20,5 @@ jobs:
       # You can test your matrix by printing the current Go version
       - name: Runing
         run: go install github.com/TimoKats/mdrss@latest &&
-             mdrss --config .mdrss/config.json update
+             mdrss --config ./.mdrss/config.json update
 
