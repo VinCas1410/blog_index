@@ -1,10 +1,7 @@
 name: Go
 
 on: [push]
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+
 jobs:
   build:
 
@@ -18,11 +15,9 @@ jobs:
       - name: Setup Go ${{ matrix.go-version }}
         uses: actions/setup-go@v5
         with:
+          path: '.'
           go-version: ${{ matrix.go-version }}
       # You can test your matrix by printing the current Go version
-      - name: Uploading repo
-        with:
-          path: '.'
       - name: Runing
         run: go install github.com/TimoKats/mdrss@latest &&
              mdrss --config .mdrss/config.json update
