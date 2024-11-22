@@ -2,7 +2,7 @@ name: Go
 
 on: [push]
 permissions:
-  contents: read
+  contents: all
 jobs:
   build:
     runs-on: ubuntu-latest
