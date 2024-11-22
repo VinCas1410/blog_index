@@ -18,7 +18,7 @@ jobs:
           path: '.'
           go-version: ${{ matrix.go-version }}
       - name: test mdrss dir
-        run: ls ./.mdrss
+        run: cat ./.mdrss/config.json
       # You can test your matrix by printing the current Go version
       - name: install mdrss
         run: go install github.com/TimoKats/mdrss@latest
