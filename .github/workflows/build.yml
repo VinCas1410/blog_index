@@ -23,5 +23,5 @@ jobs:
       - name: install mdrss
         run: go install github.com/TimoKats/mdrss@latest
       - name: run mdrss
-        run: mdrss --config ./.mdrss/config.json update
+        run: mdrss --config "./.mdrss/config.json" update
 
