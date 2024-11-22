@@ -15,7 +15,7 @@ jobs:
       - name: Setup Go ${{ matrix.go-version }}
         uses: actions/setup-go@v5
         with:
-          path: '.'
+          path: './'
           go-version: ${{ matrix.go-version }}
       - name: test mdrss dir
         run: cat ./.mdrss/config.json
@@ -23,5 +23,5 @@ jobs:
       - name: install mdrss
         run: go install github.com/TimoKats/mdrss@latest
       - name: run mdrss
-        run: mdrss --config "./.mdrss/config.json" update
+        run: mdrss --config update
 
