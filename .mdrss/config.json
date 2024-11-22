@@ -1,7 +1,7 @@
   {
     "Author": "Erica",
-    "Description": "Erica's blog",
-    "InputFolder": "./blog", # This will contain your markdown files
+    "Description": "Erica blog",
+    "InputFolder": "./blog", 
     "OutputFile": "./output",
-    "Link": "blog.xml" # can be anything, might be deprecated
+    "Link": "blog.xml"
   }
