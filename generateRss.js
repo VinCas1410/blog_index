@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const marked = require('marked');
+const { marked } = require('marked');  // Updated import for v3+
 const frontMatter = require('front-matter');
 const xml2js = require('xml2js');
 
