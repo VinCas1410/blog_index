@@ -1,5 +1,5 @@
 ---
-title: Venice Canals: "A Dream Come True"
+title: "Venice Canals: A Dream Come True"
 date: 2024-11-10
 description: "Experience the magic of Venice and its famous canals."
 tags: ["Venice", "Italy", "Canals", "Travel"]
