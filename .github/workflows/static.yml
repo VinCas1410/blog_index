@@ -46,4 +46,63 @@ jobs:
           git commit -m "Generate RSS feed (index.xml)"
           git push
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}name: Generate RSS Feed from Markdown
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'posts/**'
+      - 'config.json'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          npm install marked front-matter xml2js
+
+      # Run the script to generate the RSS feed (index.xml)
+      - name: Generate RSS Feed
+        run: |
+          node generateRss.js
+
+      # Check if index.xml was generated
+      - name: Check if index.xml was generated
+        run: |
+          if [ -f xml/index.xml ]; then
+            echo "index.xml generated"
+          else
+            echo "index.xml not found"
+            exit 1
+          fi
+
+      # Conditionally commit and push the generated index.xml file
+      - name: Commit and push RSS feed
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+          # Check if the index.xml file has been modified
+          if git diff --quiet xml/index.xml; then
+            echo "No changes to commit."
+          else
+            git add xml/index.xml
+            git commit -m "Generate RSS feed (index.xml)"
+            git push
+          fi
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
