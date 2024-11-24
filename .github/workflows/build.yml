@@ -22,6 +22,7 @@ jobs:
       # You can test your matrix by printing the current Go version
       - name: install mdrss
         run: go install github.com/TimoKats/mdrss@latest
+      - name: check current directory
+        run: pwd  # Print the current working directory to verify where you are
       - name: run mdrss
-        run:  mdrss --config "./.mdrss/config.json" update
-
+        run: mdrss --config "$(pwd)/.mdrss/config.json" update  # Use absolute path
