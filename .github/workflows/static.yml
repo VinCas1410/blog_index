@@ -48,13 +48,8 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
-          # Check if the index.xml file has been modified
-          if git diff --quiet xml/index.xml; then
-            echo "No changes to commit."
-          else
-            git add xml/index.xml
-            git commit -m "Generate RSS feed (index.xml)"
-            git push
-          fi
+          git add xml/index.xml
+          git commit -m "Generate RSS feed (index.xml)"
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
