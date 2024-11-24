@@ -1,43 +1,62 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Markdown to XML Conversion
 
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+    branches:
+      - main  # Change this to your default branch if needed
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # Use a compatible Node.js version
+
+    - name: Install dependencies
+      run: |
+        npm install marked xml2js
+
+    - name: Convert Markdown to XML
+      run: |
+        # Create the 'xml' directory if it doesn't exist
+        mkdir -p xml
+
+        # Initialize an empty XML root
+        xmlContent="<posts>"
+
+        # Loop through all markdown files in 'posts' directory
+        for file in posts/*.md; do
+          # Read the markdown content
+          markdownContent=$(cat $file)
+
+          # Extract the title (first line in Markdown, typically a # header)
+          title=$(echo "$markdownContent" | head -n 1 | sed 's/^# //')
+
+          # Convert Markdown to HTML using marked
+          htmlContent=$(echo "$markdownContent" | npx marked)
+
+          # Append this post’s XML content to the main XML structure
+          xmlContent="$xmlContent<post><title>$title</title><content>$htmlContent</content></post>"
+        done
+
+        # Close the XML root tag
+        xmlContent="$xmlContent</posts>"
+
+        # Write the final XML content to index.xml
+        echo "$xmlContent" > xml/index.xml
+
+    - name: Commit and push XML file
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
+        git add xml/index.xml
+        git commit -m "Generate index.xml with all posts"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
