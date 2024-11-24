@@ -20,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Specify the Node.js version
+          node-version: '16'
 
       # Install dependencies
       - name: Install dependencies
@@ -31,6 +31,11 @@ jobs:
       - name: Generate RSS Feed
         run: |
           node generateRss.js
+
+      # Clean up untracked files (node_modules, etc.)
+      - name: Clean up untracked files
+        run: |
+          git clean -fdx
 
       # Commit and push the generated index.xml file
       - name: Commit and push RSS feed
