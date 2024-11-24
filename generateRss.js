@@ -78,10 +78,15 @@ function generateXml(posts) {
 
 // Save the generated RSS XML to the output directory
 function saveRss(xml) {
+    // Ensure the output directory exists
     if (!fs.existsSync(outputDirectory)) {
-        fs.mkdirSync(outputDirectory);
+        fs.mkdirSync(outputDirectory, { recursive: true });
+        console.log(`Created directory: ${outputDirectory}`);
     }
+
     const outputPath = path.join(outputDirectory, 'index.xml');
+    
+    // Write XML to the file
     fs.writeFileSync(outputPath, xml);
     console.log('RSS feed generated at', outputPath);
 }

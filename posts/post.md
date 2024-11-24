@@ -1,9 +1,8 @@
 ---
-title: Exploring Paris
+title: "Exploring Paris"
 date: 2024-11-23
-description: A journey through the beautiful streets of Paris, the city of love and lights.
-tags: [Paris, France, Travel, City Tour]
-image: "https://example.com/images/paris.jpg"
+description: "A journey through the beautiful streets of Paris, the city of love and lights."
+tags: ["Paris", "France", "Travel", "City Tour"]
 ---
 
 # Exploring Paris

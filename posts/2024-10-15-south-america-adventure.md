@@ -1,10 +1,10 @@
 ---
-title: South America Adventure: From Andes to Amazon
+title: "South America Adventure: From Andes to Amazon"
 date: 2024-10-15
-description: My thrilling adventure across South America, from the Andes mountains to the Amazon rainforest.
-tags: [South America, Travel, Adventure, Peru, Brazil]
-image: "https://example.com/images/south-america.jpg"
+description: "My thrilling adventure across South America, from the Andes mountains to the Amazon rainforest."
+tags: ["South America", "Travel", "Adventure", "Peru", "Brazil"]
 ---
+
 
 # South America Adventure: From Andes to Amazon
 
@@ -12,7 +12,7 @@ This past month, I embarked on an adventure across South America, traveling from
 
 ## Hiking the Inca Trail to Machu Picchu
 
-One of the most unforgettable experiences was hiking the Inca Trail to Machu Picchu. The trek was challenging but rewarding, offering stunning views of the Peruvian mountains and ancient ruins along the way.
+One of the most unforgettable experiences was hiking the Inca Trail to Machu Picchu. The trek was challenging but rewarding, offering stunning views of the Peruvian mountains and ancient ruins along the way
 
 ![Machu Picchu](https://example.com/images/machu-picchu.jpg)
 
