@@ -1,4 +1,4 @@
-name: Generate RSS Feed from Markdown
+name: Generate RSS Feed from Markdown and Deploy
 
 on:
   push:
@@ -42,14 +42,49 @@ jobs:
             exit 1
           fi
 
-      # Conditionally commit and push the generated index.xml file
+      # Commit and push RSS feed if there are changes
       - name: Commit and push RSS feed
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
+          # Stage changes
           git add xml/index.xml
-          git commit -m "Generate RSS feed (index.xml)"
-          git push
+
+          # Check if the index.xml file has been modified
+          if ! git diff --cached --quiet; then
+            git commit -m "Generate RSS feed (index.xml)"
+            git push
+          else
+            echo "No changes to commit."
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # Build static site (if necessary)
+      - name: Prepare Deployment Directory
+        run: |
+          mkdir -p dist
+          cp -r xml/index.xml dist/
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
+          publish_branch: gh-pages
