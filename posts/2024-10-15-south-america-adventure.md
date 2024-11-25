@@ -14,7 +14,7 @@ This past month, I embarked on an adventure across South America, traveling from
 
 One of the most unforgettable experiences was hiking the Inca Trail to Machu Picchu. The trek was challenging but rewarding, offering stunning views of the Peruvian mountains and ancient ruins along the way
 
-![Machu Picchu](https://example.com/images/machu-picchu.jpg)
+
 
 ## Amazon Rainforest Experience
 

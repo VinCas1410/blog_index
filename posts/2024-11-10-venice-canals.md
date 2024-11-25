@@ -13,7 +13,6 @@ Venice is a city unlike any other. It’s not only famous for its rich history b
 
 The highlight of any trip to Venice is a gondola ride. The canals provide a unique perspective of the city, and it’s the best way to see its charming bridges and beautiful buildings.
 
-![Gondola Ride](https://example.com/images/gondola-ride.jpg)
 
 ## Piazza San Marco
 
