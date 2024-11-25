@@ -11,6 +11,17 @@ const postsDirectory = config.postsDirectory; // Folder where markdown files are
 const outputDirectory = config.outputDirectory || 'xml'; // Folder to save XML
 const siteMetadata = config.site;
 
+// Utility to escape special characters in XML
+function escapeXml(unsafe) {
+    return unsafe.replace(/[<>&'"]/g, c => ({
+        '<': '&lt;',
+        '>': '&gt;',
+        '&': '&amp;',
+        "'": '&apos;',
+        '"': '&quot;',
+    }[c]));
+}
+
 // Function to fetch existing XML metadata dynamically from GitHub Pages
 async function fetchExistingMetadata() {
     return new Promise((resolve, reject) => {
@@ -48,16 +59,25 @@ async function generateRss() {
         const htmlContent = marked(body); // Convert Markdown body to HTML
 
         posts.push({
-            title: attributes.title,
+            title: escapeXml(attributes.title || 'Untitled Post'),
             date: attributes.date || new Date().toUTCString(),
-            content: htmlContent,
+            content: escapeXml(htmlContent),
             link: `${siteMetadata.link}/${file}`,
             guid: `${siteMetadata.link}/${file}`,
         });
     }
 
     // Fetch metadata from the existing RSS feed
-    const { title, lastBuildDate } = await fetchExistingMetadata();
+    let title = siteMetadata.title;
+    let lastBuildDate = new Date().toUTCString(); // Default to now if fetching fails
+    try {
+        const fetchedMetadata = await fetchExistingMetadata();
+        title = fetchedMetadata.title;
+        lastBuildDate = fetchedMetadata.lastBuildDate;
+    } catch (err) {
+        console.error('Failed to fetch existing metadata:', err);
+    }
+
     siteMetadata.title = title; // Update with fetched title
     siteMetadata.lastBuildDate = lastBuildDate; // Use the actual lastBuildDate
 
@@ -92,7 +112,7 @@ function generateXml(posts) {
                     item: posts.map(post => ({
                         title: post.title,
                         link: post.link,
-                        description: post.content,
+                        description: `<![CDATA[${post.content}]]>`,
                         pubDate: post.date,
                         guid: post.guid,
                     })),
@@ -102,7 +122,7 @@ function generateXml(posts) {
     };
 
     // Convert JavaScript object to XML
-    const builder = new xml2js.Builder();
+    const builder = new xml2js.Builder({ headless: true }); // No XML declaration for simplicity
     return builder.buildObject(rss);
 }
 
