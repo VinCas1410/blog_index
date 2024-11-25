@@ -44,9 +44,9 @@ function generateXml(posts) {
     const rss = {
         rss: {
             $: {
-                xmlns: 'http://www.w3.org/2005/Atom', // RSS 2.0 namespace
-                'xmlns:atom': 'http://www.w3.org/2005/Atom', // Atom namespace definition
+                xmlns: 'http://www.w3.org/2005/Atom',  // RSS namespace
                 version: '2.0',
+                'xmlns:atom': 'http://www.w3.org/2005/Atom', // Atom namespace declaration
             },
             channel: [
                 {
@@ -56,6 +56,7 @@ function generateXml(posts) {
                     generator: siteMetadata.generator,
                     language: siteMetadata.language,
                     lastBuildDate: lastBuildDate, // Use the consistent lastBuildDate
+                    // Ensure the atom:link uses the correct namespace prefix
                     'atom:link': {
                         $: {
                             href: siteMetadata.rssLink,
@@ -74,11 +75,22 @@ function generateXml(posts) {
             ],
         },
     };
-  
-    // Convert JavaScript object to XML
-    const builder = new xml2js.Builder();
-    return builder.buildObject(rss);
+
+    // Manually adjust the namespace to add "atom" prefix to the link tag
+    const builder = new xml2js.Builder({
+        xmldec: { version: '1.0', encoding: 'UTF-8' },
+        renderOpts: { pretty: true, indent: '  ', newline: '\n' }
+    });
+
+    // Explicitly convert the atom:link to the desired format
+    let xml = builder.buildObject(rss);
+
+    // Replace 'atom:link' with the correct namespace prefix
+    xml = xml.replace('<atom:link', '<link xmlns:atom="http://www.w3.org/2005/Atom"');
+
+    return xml;
 }
+
 
 
 // Save the generated RSS XML to the output directory
