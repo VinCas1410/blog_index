@@ -45,7 +45,7 @@ function generateXml(posts) {
         rss: {
             $: {
                 xmlns: 'http://www.w3.org/2005/Atom', // RSS 2.0 namespace
-                xmlns:atom: 'http://www.w3.org/2005/Atom', // Atom namespace definition
+                'xmlns:atom': 'http://www.w3.org/2005/Atom', // Atom namespace definition
                 version: '2.0',
             },
             channel: [
