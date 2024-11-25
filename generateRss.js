@@ -44,7 +44,8 @@ function generateXml(posts) {
     const rss = {
         rss: {
             $: {
-                xmlns: 'http://www.w3.org/2005/Atom',
+                xmlns: 'http://www.w3.org/2005/Atom', // RSS 2.0 namespace
+                xmlns:atom: 'http://www.w3.org/2005/Atom', // Atom namespace definition
                 version: '2.0',
             },
             channel: [
@@ -73,11 +74,12 @@ function generateXml(posts) {
             ],
         },
     };
-
+  
     // Convert JavaScript object to XML
     const builder = new xml2js.Builder();
     return builder.buildObject(rss);
 }
+
 
 // Save the generated RSS XML to the output directory
 function saveRss(xml) {
