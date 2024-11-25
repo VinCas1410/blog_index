@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const https = require('https');
 const { marked } = require('marked'); // Updated import for v3+
 const frontMatter = require('front-matter');
 const xml2js = require('xml2js');
@@ -22,30 +21,6 @@ function escapeXml(unsafe) {
     }[c]));
 }
 
-// Function to fetch existing XML metadata dynamically from GitHub Pages
-async function fetchExistingMetadata() {
-    return new Promise((resolve, reject) => {
-        https.get(siteMetadata.rssLink, (res) => {
-            let data = '';
-            res.on('data', chunk => (data += chunk));
-            res.on('end', () => {
-                xml2js.parseString(data, (err, result) => {
-                    if (err) return reject(err);
-
-                    try {
-                        const channel = result.rss.channel[0];
-                        const title = channel.title[0];
-                        const lastBuildDate = channel.lastBuildDate[0];
-                        resolve({ title, lastBuildDate });
-                    } catch (err) {
-                        reject(new Error("Failed to parse existing RSS metadata."));
-                    }
-                });
-            });
-        }).on('error', reject);
-    });
-}
-
 // Function to read Markdown files from the 'posts' directory and generate RSS
 async function generateRss() {
     const posts = [];
@@ -61,25 +36,11 @@ async function generateRss() {
         posts.push({
             title: escapeXml(attributes.title || 'Untitled Post'),
             date: attributes.date || new Date().toUTCString(),
-            content: escapeXml(htmlContent),
+            content: `<![CDATA[${htmlContent}]]>`, // Wrap in CDATA for HTML
             link: `${siteMetadata.link}/${file}`,
             guid: `${siteMetadata.link}/${file}`,
         });
     }
-
-    // Fetch metadata from the existing RSS feed
-    let title = siteMetadata.title;
-    let lastBuildDate = new Date().toUTCString(); // Default to now if fetching fails
-    try {
-        const fetchedMetadata = await fetchExistingMetadata();
-        title = fetchedMetadata.title;
-        lastBuildDate = fetchedMetadata.lastBuildDate;
-    } catch (err) {
-        console.error('Failed to fetch existing metadata:', err);
-    }
-
-    siteMetadata.title = title; // Update with fetched title
-    siteMetadata.lastBuildDate = lastBuildDate; // Use the actual lastBuildDate
 
     // Generate RSS feed XML
     const rssXml = generateXml(posts);
@@ -101,7 +62,7 @@ function generateXml(posts) {
                     description: siteMetadata.description,
                     generator: siteMetadata.generator,
                     language: siteMetadata.language,
-                    lastBuildDate: siteMetadata.lastBuildDate,
+                    lastBuildDate: new Date().toUTCString(),
                     'atom:link': {
                         $: {
                             href: siteMetadata.rssLink,
@@ -112,7 +73,7 @@ function generateXml(posts) {
                     item: posts.map(post => ({
                         title: post.title,
                         link: post.link,
-                        description: `<![CDATA[${post.content}]]>`,
+                        description: post.content,
                         pubDate: post.date,
                         guid: post.guid,
                     })),

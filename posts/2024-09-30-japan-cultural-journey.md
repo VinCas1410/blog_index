@@ -1,6 +1,6 @@
 ---
 title: "A Cultural Journey Through Japan"
-date: 2024-09-30
+date: 2024-09-20
 description: "Discover the rich culture and history of Japan, from Kyoto temples to Tokyo's modern skyline."
 tags: ["Japan", "Culture", "Travel", "Kyoto", "Tokyo"]
 ---
