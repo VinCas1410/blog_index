@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { marked } = require('marked'); // Updated import for v3+
+const { marked } = require('marked');  // Updated import for v3+
 const frontMatter = require('front-matter');
 const xml2js = require('xml2js');
 
@@ -10,16 +10,8 @@ const postsDirectory = config.postsDirectory; // Folder where markdown files are
 const outputDirectory = config.outputDirectory || 'xml'; // Folder to save XML
 const siteMetadata = config.site;
 
-// Utility to escape special characters in XML
-function escapeXml(unsafe) {
-    return unsafe.replace(/[<>&'"]/g, c => ({
-        '<': '&lt;',
-        '>': '&gt;',
-        '&': '&amp;',
-        "'": '&apos;',
-        '"': '&quot;',
-    }[c]));
-}
+// Generate lastBuildDate once and use it consistently
+const lastBuildDate = new Date().toUTCString();
 
 // Function to read Markdown files from the 'posts' directory and generate RSS
 async function generateRss() {
@@ -31,12 +23,12 @@ async function generateRss() {
         const fileContent = fs.readFileSync(filePath, 'utf-8');
         
         const { attributes, body } = frontMatter(fileContent);
-        const htmlContent = marked(body); // Convert Markdown body to HTML
+        const htmlContent = marked(body);  // Convert Markdown body to HTML
 
         posts.push({
-            title: escapeXml(attributes.title || 'Untitled Post'),
-            date: attributes.date || new Date().toUTCString(),
-            content: `<![CDATA[${htmlContent}]]>`, // Wrap in CDATA for HTML
+            title: attributes.title,
+            date: attributes.date || lastBuildDate, // Use consistent lastBuildDate as default
+            content: htmlContent,
             link: `${siteMetadata.link}/${file}`,
             guid: `${siteMetadata.link}/${file}`,
         });
@@ -62,7 +54,7 @@ function generateXml(posts) {
                     description: siteMetadata.description,
                     generator: siteMetadata.generator,
                     language: siteMetadata.language,
-                    lastBuildDate: new Date().toUTCString(),
+                    lastBuildDate: lastBuildDate, // Use the consistent lastBuildDate
                     'atom:link': {
                         $: {
                             href: siteMetadata.rssLink,
@@ -83,7 +75,7 @@ function generateXml(posts) {
     };
 
     // Convert JavaScript object to XML
-    const builder = new xml2js.Builder({ headless: true }); // No XML declaration for simplicity
+    const builder = new xml2js.Builder();
     return builder.buildObject(rss);
 }
 
