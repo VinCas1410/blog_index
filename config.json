@@ -1,12 +1,11 @@
 {
   "site": {
-    "title": "Luke Smith's Webpage on Luke's Webpage",
-    "link": "https://lukesmith.xyz/",
-    "description": "Recent content in Luke Smith's Webpage on Luke's Webpage",
-    "generator": "Hugo -- gohugo.io",
+    "title": "Erica's travel website",
+    "link": "https://vincas1410.github.io/blog_index/",
+    "description": "Recent content in Erica's Webpage on Erica's travel Webpage",
+    "generator": "marked v3 with xml2js",
     "language": "en-us",
-    "lastBuildDate": "Sat, 15 Jun 2024 15:38:12 -0400",
-    "rssLink": "https://lukesmith.xyz/index.xml"
+    "rssLink": "https://vincas1410.github.io/blog_index/xml/index.xml"
   },
   "postsDirectory": "posts",
   "outputDirectory": "xml"

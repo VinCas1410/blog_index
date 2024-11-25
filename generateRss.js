@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const { marked } = require('marked');  // Updated import for v3+
+const https = require('https');
+const { marked } = require('marked'); // Updated import for v3+
 const frontMatter = require('front-matter');
 const xml2js = require('xml2js');
 
@@ -9,6 +10,30 @@ const config = require('./config.json');
 const postsDirectory = config.postsDirectory; // Folder where markdown files are stored
 const outputDirectory = config.outputDirectory || 'xml'; // Folder to save XML
 const siteMetadata = config.site;
+
+// Function to fetch existing XML metadata dynamically from GitHub Pages
+async function fetchExistingMetadata() {
+    return new Promise((resolve, reject) => {
+        https.get(siteMetadata.rssLink, (res) => {
+            let data = '';
+            res.on('data', chunk => (data += chunk));
+            res.on('end', () => {
+                xml2js.parseString(data, (err, result) => {
+                    if (err) return reject(err);
+
+                    try {
+                        const channel = result.rss.channel[0];
+                        const title = channel.title[0];
+                        const lastBuildDate = channel.lastBuildDate[0];
+                        resolve({ title, lastBuildDate });
+                    } catch (err) {
+                        reject(new Error("Failed to parse existing RSS metadata."));
+                    }
+                });
+            });
+        }).on('error', reject);
+    });
+}
 
 // Function to read Markdown files from the 'posts' directory and generate RSS
 async function generateRss() {
@@ -20,7 +45,7 @@ async function generateRss() {
         const fileContent = fs.readFileSync(filePath, 'utf-8');
         
         const { attributes, body } = frontMatter(fileContent);
-        const htmlContent = marked(body);  // Convert Markdown body to HTML
+        const htmlContent = marked(body); // Convert Markdown body to HTML
 
         posts.push({
             title: attributes.title,
@@ -30,6 +55,11 @@ async function generateRss() {
             guid: `${siteMetadata.link}/${file}`,
         });
     }
+
+    // Fetch metadata from the existing RSS feed
+    const { title, lastBuildDate } = await fetchExistingMetadata();
+    siteMetadata.title = title; // Update with fetched title
+    siteMetadata.lastBuildDate = lastBuildDate; // Use the actual lastBuildDate
 
     // Generate RSS feed XML
     const rssXml = generateXml(posts);
