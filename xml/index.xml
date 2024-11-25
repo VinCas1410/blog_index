@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<rss xmlns="http://www.w3.org/2005/Atom" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns="http://www.w3.org/2005/Atom" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Erica's travel website</title>
     <link>https://vincas1410.github.io/blog_index/</link>
     <description>Recent content in Erica's Webpage on Erica's travel Webpage</description>
     <generator>marked v3 with xml2js</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 Nov 2024 01:45:55 GMT</lastBuildDate>
-    <atom:link href="https://vincas1410.github.io/blog_index/xml/index.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Mon, 25 Nov 2024 01:52:20 GMT</lastBuildDate>
+    <link xmlns:atom="http://www.w3.org/2005/Atom" href="https://vincas1410.github.io/blog_index/xml/index.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>A Cultural Journey Through Japan</title>
       <link>https://vincas1410.github.io/blog_index//2024-09-20-japan-cultural-journey.md</link>
