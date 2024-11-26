@@ -6,7 +6,7 @@
     <description>Recent content in Erica's Webpage on Erica's travel Webpage</description>
     <generator>marked v3 with xml2js</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Nov 2024 13:10:47 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 26 Nov 2024 13:18:09 GMT</lastBuildDate>
     <atom:link href="https://vincas1410.github.io/blog_index/xml/index.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>A Cultural Journey Through Japan</title>
@@ -72,6 +72,15 @@
 </description>
       <pubDate>Sat, 23 Nov 2024 00:00:00 GMT</pubDate>
       <guid>https://vincas1410.github.io/blog_index//2024-11-23-exploring-paris.md</guid>
+    </item>
+    <item>
+      <title>Hate</title>
+      <link>https://vincas1410.github.io/blog_index//ihateyou.md</link>
+      <description>&lt;h1&gt;Hate&lt;/h1&gt;
+&lt;p&gt;I hate living&lt;/p&gt;
+</description>
+      <pubDate>Tue, 26 Nov 2024 00:00:00 GMT</pubDate>
+      <guid>https://vincas1410.github.io/blog_index//ihateyou.md</guid>
     </item>
   </channel>
 </rss>
