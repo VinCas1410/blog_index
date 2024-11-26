@@ -1,0 +1,59 @@
+name: Build and Generate RSS Feed
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'posts/**'
+      - 'config.json'
+      - 'generateRss.js'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          npm install marked front-matter xml2js
+
+      - name: Generate RSS Feed
+        run: |
+          node generateRss.js
+
+      - name: Check if index.xml was generated
+        run: |
+          if [ -f xml/index.xml ]; then
+            echo "index.xml generated"
+          else
+            echo "index.xml not found"
+            exit 1
+          fi
+
+      - name: Commit and push RSS feed
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+          git add xml/index.xml
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Generate RSS feed (index.xml)"
+            git push
+          else
+            echo "No changes to commit."
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
