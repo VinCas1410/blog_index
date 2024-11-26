@@ -7,6 +7,7 @@ on:
     paths:
       - 'posts/**'
       - 'config.json'
+      - 'generateRss.js'
   workflow_dispatch:
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -19,6 +20,7 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -75,8 +77,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment:
-            name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     steps:
 
@@ -93,3 +95,18 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+      # Additional step to check for discrepancies and update the deployment if necessary
+      - name: Check and update deployment
+        run: |
+          git fetch --all
+          LOCAL_SHA=$(git rev-parse HEAD)
+          REMOTE_SHA=$(git rev-parse origin/main)
+
+          if [ "$LOCAL_SHA" != "$REMOTE_SHA" ]; then
+            echo "Local repository is ahead. Deploying updates..."
+            git push origin HEAD:main
+          else
+            echo "Local repository is up-to-date."
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
