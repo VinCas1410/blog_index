@@ -13,7 +13,7 @@ Paris is always a good idea, they say, and I couldn’t agree more. From the Eif
 
 No visit to Paris is complete without seeing the Eiffel Tower. Standing tall at 330 meters, it is the symbol of the city and a must-see.
 
-![Eiffel Tower](https://example.com/images/eiffel-tower.jpg)
+![Eiffel Tower](https://media.architecturaldigest.com/photos/66a951edce728792a48166e6/16:9/w_2560%2Cc_limit/GettyImages-955441104.jpg)
 
 ## Strolling Through Montmartre
 
