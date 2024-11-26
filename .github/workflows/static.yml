@@ -95,18 +95,25 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      # Additional step to check for discrepancies and update the deployment if necessary
-      - name: Check and update deployment
+     # Commit and push RSS feed if there are changes
+      - name: Commit and push RSS feed
         run: |
-          git fetch --all
-          LOCAL_SHA=$(git rev-parse HEAD)
-          REMOTE_SHA=$(git rev-parse origin/main)
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+    
+          # Fetch and pull the latest changes
+          git fetch origin
+          git pull origin main
 
-          if [ "$LOCAL_SHA" != "$REMOTE_SHA" ]; then
-            echo "Local repository is ahead. Deploying updates..."
-            git push origin HEAD:main
+          # Stage changes
+          git add xml/index.xml
+
+          # Check if the index.xml file has been modified
+          if ! git diff --cached --quiet; then
+            git commit -m "Generate RSS feed (index.xml)"
+            git push
           else
-            echo "Local repository is up-to-date."
+            echo "No changes to commit."
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
