@@ -25,9 +25,12 @@ async function generateRss() {
         const { attributes, body } = frontMatter(fileContent);
         const htmlContent = marked(body);  // Convert Markdown body to HTML
 
+        // Check for date in front matter and format it correctly
+        const postDate = attributes.date ? new Date(attributes.date).toUTCString() : lastBuildDate;
+
         posts.push({
             title: attributes.title,
-            date: attributes.date || lastBuildDate, // Use consistent lastBuildDate as default
+            date: postDate, // Use the date from front matter if available
             content: htmlContent,
             link: `${siteMetadata.link}/${file}`,
             guid: `${siteMetadata.link}/${file}`,
@@ -78,8 +81,6 @@ function generateXml(posts) {
     const builder = new xml2js.Builder();
     return builder.buildObject(rss);
 }
-
-
 
 // Save the generated RSS XML to the output directory
 function saveRss(xml) {
