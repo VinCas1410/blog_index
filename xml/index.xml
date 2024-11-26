@@ -6,7 +6,7 @@
     <description>Recent content in Erica's Webpage on Erica's travel Webpage</description>
     <generator>marked v3 with xml2js</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Nov 2024 13:21:57 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 26 Nov 2024 13:23:58 GMT</lastBuildDate>
     <atom:link href="https://vincas1410.github.io/blog_index/xml/index.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>A Cultural Journey Through Japan</title>
@@ -79,7 +79,10 @@
       <description>&lt;h1&gt;Hate&lt;/h1&gt;
 &lt;p&gt;I hate living&lt;/p&gt;
 &lt;h1&gt;I am angry&lt;/h1&gt;
-&lt;p&gt;now&lt;/p&gt;
+&lt;p&gt;now
+3&lt;/p&gt;
+&lt;h2&gt;sad&lt;/h2&gt;
+&lt;p&gt;sad&lt;/p&gt;
 </description>
       <pubDate>Tue, 26 Nov 2024 00:00:00 GMT</pubDate>
       <guid>https://vincas1410.github.io/blog_index//ihateyou.md</guid>
