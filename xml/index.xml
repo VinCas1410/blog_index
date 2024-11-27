@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<?xml-stylesheet type="text/css" href="https://raw.githubusercontent.com/VinCas1410/blog_index/refs/heads/main/style.css"?>
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>Erica's travel website</title>
@@ -77,6 +76,7 @@
     <item>
       <title>Discovering the Magic of Hong Kong: A Journey Through the Skyline</title>
       <link>https://vincas1410.github.io/blog_index//2024-11-27-hongkong.md</link>
+      <style>.blog { height: auto; } </style>
       <description>&lt;h1&gt;Hong Kong&lt;/h1&gt;
 &lt;p&gt;&lt;img src="https://vincas1410.github.io/blog_index/images/hongkong.jpg" alt="Hong Kong Skyline"&gt;&lt;/p&gt;
 &lt;h2&gt;Introduction&lt;/h2&gt;
