@@ -76,8 +76,9 @@
     <item>
       <title>Discovering the Magic of Hong Kong: A Journey Through the Skyline</title>
       <link>https://vincas1410.github.io/blog_index//2024-11-27-hongkong.md</link>
-      <style>.blog { height: auto; } </style>
-      <description>&lt;h1&gt;Hong Kong&lt;/h1&gt;
+      <description>
+              <style>.blog { height: auto; } </style>
+        &lt;h1&gt;Hong Kong&lt;/h1&gt;
 &lt;p&gt;&lt;img src="https://vincas1410.github.io/blog_index/images/hongkong.jpg" alt="Hong Kong Skyline"&gt;&lt;/p&gt;
 &lt;h2&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Hey everyone, it’s Erica here! 🌟 Today, I’m thrilled to share my incredible journey through the mesmerizing city of Hong Kong. This city is a perfect blend of modernity and tradition, and I can’t wait to take you through my adventure. Let’s dive in!&lt;/p&gt;
