@@ -77,7 +77,7 @@
       <title>Discovering the Magic of Hong Kong: A Journey Through the Skyline</title>
       <link>https://vincas1410.github.io/blog_index//2024-11-27-hongkong.md</link>
       <description>
-              <style>.blog { height: auto; } </style>
+              <style>.blog { height: auto !important; } </style>
         &lt;h1&gt;Hong Kong&lt;/h1&gt;
 &lt;p&gt;&lt;img src="https://vincas1410.github.io/blog_index/images/hongkong.jpg" alt="Hong Kong Skyline"&gt;&lt;/p&gt;
 &lt;h2&gt;Introduction&lt;/h2&gt;
