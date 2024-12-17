@@ -1,0 +1,22 @@
+<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="50" height="50" fill="url(#paint0_radial_30_81)"/>
+<rect width="50" height="50" fill="url(#paint1_radial_30_81)"/>
+<path d="M33.3125 43.2083H16.0625C10.5152 43.2083 6 38.9563 6 33.7292V17.4792C6 12.2521 10.5152 8 16.0625 8H33.3125C38.8598 8 43.375 12.2521 43.375 17.4792V33.7292C43.375 38.9563 38.8598 43.2083 33.3125 43.2083ZM16.0625 10.7083C12.0993 10.7083 8.875 13.7457 8.875 17.4792V33.7292C8.875 37.4626 12.0993 40.5 16.0625 40.5H33.3125C37.2757 40.5 40.5 37.4626 40.5 33.7292V17.4792C40.5 13.7457 37.2757 10.7083 33.3125 10.7083H16.0625Z" fill="white"/>
+<path d="M36.1562 18.0625C37.3471 18.0625 38.3125 17.1531 38.3125 16.0312C38.3125 14.9094 37.3471 14 36.1562 14C34.9654 14 34 14.9094 34 16.0312C34 17.1531 34.9654 18.0625 36.1562 18.0625Z" fill="white"/>
+<path d="M25.0625 35.9583C19.5152 35.9583 15 31.7062 15 26.4792C15 21.2521 19.5152 17 25.0625 17C30.6098 17 35.125 21.2521 35.125 26.4792C35.125 31.7062 30.6098 35.9583 25.0625 35.9583ZM25.0625 19.7083C21.0993 19.7083 17.875 22.7457 17.875 26.4792C17.875 30.2126 21.0993 33.25 25.0625 33.25C29.0257 33.25 32.25 30.2126 32.25 26.4792C32.25 22.7457 29.0257 19.7083 25.0625 19.7083Z" fill="white"/>
+<defs>
+<radialGradient id="paint0_radial_30_81" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(18.5874 50.0361) scale(62.3268 62.3268)">
+<stop stop-color="#FFDD55"/>
+<stop offset="0.328" stop-color="#FF543F"/>
+<stop offset="0.348" stop-color="#FC5245"/>
+<stop offset="0.504" stop-color="#E64771"/>
+<stop offset="0.643" stop-color="#D53E91"/>
+<stop offset="0.761" stop-color="#CC39A4"/>
+<stop offset="0.841" stop-color="#C837AB"/>
+</radialGradient>
+<radialGradient id="paint1_radial_30_81" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(8.04576 -0.624246) scale(41.3851 27.5749)">
+<stop stop-color="#4168C9"/>
+<stop offset="0.999" stop-color="#4168C9" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
